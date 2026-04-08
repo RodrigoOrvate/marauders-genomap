@@ -1,0 +1,21 @@
+# Dados de Bioinformática (SRA e FASTQ)
+*.fastq.gz
+*.fastq
+*.sra
+*.faa
+*.tbl
+*.fasta
+
+# Pastas de Resultados do Marauders
+01_Predicted_Proteins/
+02_HMMER_Results/
+05_Assembly_Results/
+01_QC_Reports/
+02_Trimmed_Reads/
+03_Normalized_Reads/
+04_MultiQC_Report/
+SRR*/
+
+# Docker e Python
+__pycache__/
+.env

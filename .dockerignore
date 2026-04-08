@@ -1,0 +1,5 @@
+__pycache__/
+*.fastq.gz
+.git/
+*/05_Assembly_Results/
+*/01_Predicted_Proteins/
