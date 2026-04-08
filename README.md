@@ -26,19 +26,26 @@ Em vez de compilar todo o ambiente localmente (o que pode levar muito tempo), vo
 
 ## 🚀 Tutorial de Uso
 
-### 1. Baixar a Imagem Pronta
-Para obter a versão mais estável e pronta para uso, execute:
+### Opção 1A: Usar a Imagem Pronta (Mais Rápido)
+Para obter a versão mais estável sem precisar compilar nada, baixe a imagem do repositório:
 ```bash
 docker pull seu-usuario/marauders-genomap:latest
 ```
 
-###2. Configurar a Interface Gráfica (Linux)
+### Opção 1B: Rodar/Construir Localmente (Via Dockerfile)
+Se você clonou o repositório e deseja gerar a imagem na sua própria máquina (processo de build), execute:
+```bash
+# Na raiz do projeto, onde está o Dockerfile:
+docker build -t marauders-genomap .
+```
+
+### 2. Configurar a Interface Gráfica (Linux)
 Como o Marauders possui uma interface visual, você deve permitir que o container acesse o servidor de vídeo do seu sistema host:
 ```Bash
 xhost +local:docker
 ```
 
-###3. Executar o Sistema
+### 3. Executar o Sistema
 Utilize o comando abaixo para iniciar o programa. Note o uso de volumes para garantir que os resultados sejam salvos no seu computador e não apenas dentro do container:
 ```
 Bash
@@ -54,6 +61,10 @@ docker run -it --rm \
 ## 📁 Estrutura do Ambiente Docker
 
   *Sistema Base: Linux configurado com todas as dependências de Bioinformática.
+
+  *Volumes: O diretório local é mapeado para /app no container, permitindo que os arquivos de saída (genomas, gráficos e relatórios) permaneçam na sua máquina após o fechamento do software.
+
+  *Recursos: O container está configurado para detectar automaticamente a RAM e os Threads do host, otimizando o processo de Assembly.
 
   *Volumes: O diretório local é mapeado para /app no container, permitindo que os arquivos de saída (genomas, gráficos e relatórios) permaneçam na sua máquina após o fechamento do software.
 
