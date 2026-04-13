@@ -47,13 +47,12 @@ xhost +local:docker
 
 ### 3. Executar o Sistema
 Utilize o comando abaixo para iniciar o programa. Note o uso de volumes para garantir que os resultados sejam salvos no seu computador e não apenas dentro do container:
-```
-Bash
+```Bash
 docker run -it --rm \
     --env="DISPLAY" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$(pwd):/app" \
-    seu-usuario/marauders-genomap:latest
+    ghcr.io/rodrigoorvate/marauders-genomap:latest
 ```
 
 ---
