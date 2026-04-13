@@ -26,13 +26,13 @@ Em vez de compilar todo o ambiente localmente (o que pode levar muito tempo), vo
 
 ## 🚀 Tutorial de Uso
 
-### Opção 1A: Usar a Imagem Pronta (Mais Rápido)
-Para obter a versão mais estável sem precisar compilar nada, baixe a imagem do repositório:
+### Opção A: Usar a Imagem Pronta via GitHub (Recomendado)
+Para obter a versão estável diretamente do GitHub Packages sem precisar compilar nada:
 ```bash
-docker pull seu-usuario/marauders-genomap:latest
+docker pull ghcr.io/rodrigoorvate/marauders-genomap:latest
 ```
 
-### Opção 1B: Rodar/Construir Localmente (Via Dockerfile)
+### Opção B: Construir a Imagem Localmente
 Se você clonou o repositório e deseja gerar a imagem na sua própria máquina (processo de build), execute:
 ```bash
 # Na raiz do projeto, onde está o Dockerfile:
