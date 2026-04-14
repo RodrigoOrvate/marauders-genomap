@@ -163,9 +163,24 @@ class MaraudersApp(QMainWindow):
         sid = self.sra_in.text().strip()
         if not sid: return
         asm = "trinity" if self.radio_trinity.isChecked() else ("megahit" if self.radio_mega.isChecked() else "spades")
-        is_p = (self.combo_layout.currentIndex() == 0 if self.combo_type.currentIndex() == 2 else True)
-        r1 = f"{sid}_1.fastq.gz" if is_p else f"{sid}.fastq.gz"
-        r2 = f"{sid}_2.fastq.gz" if is_p else "none"
+
+        # Auto-detect which FASTQ files actually exist inside the SRA folder
+        r1_paired_path = os.path.join(sid, f"{sid}_1.fastq.gz")
+        r2_paired_path = os.path.join(sid, f"{sid}_2.fastq.gz")
+        r1_single_path = os.path.join(sid, f"{sid}.fastq.gz")
+
+        if os.path.exists(r1_paired_path):
+            r1 = f"{sid}_1.fastq.gz"
+            r2 = f"{sid}_2.fastq.gz" if os.path.exists(r2_paired_path) else "none"
+        elif os.path.exists(r1_single_path):
+            r1 = f"{sid}.fastq.gz"
+            r2 = "none"
+        else:
+            # Fallback: use layout selector (RNA-Seq) or paired default
+            is_p = (self.combo_layout.currentIndex() == 0 if self.combo_type.currentIndex() == 2 else True)
+            r1 = f"{sid}_1.fastq.gz" if is_p else f"{sid}.fastq.gz"
+            r2 = f"{sid}_2.fastq.gz" if is_p else "none"
+
         args = [r1, r2, str(self.spin_t.value()), str(self.spin_r.value()), asm, "s" if self.c_raw.isChecked() else "n", "s" if self.c_trim.isChecked() else "n"]
         self.execute_proc("bash", [os.path.abspath("scripts/run_assembly.sh")] + args, os.path.abspath(sid))
 
